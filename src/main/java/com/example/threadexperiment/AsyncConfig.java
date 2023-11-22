@@ -15,7 +15,7 @@ public class AsyncConfig {
     public ThreadPoolTaskExecutor taskExecutor() {
         final ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
 
-//        taskExecutor.setThreadFactory(threadFactory());
+        taskExecutor.setThreadFactory(threadFactory());
         taskExecutor.setThreadNamePrefix("custom-executor-");
         taskExecutor.setCorePoolSize(5);
         taskExecutor.setMaxPoolSize(10);
@@ -27,9 +27,6 @@ public class AsyncConfig {
 
     @Bean
     public ThreadFactory threadFactory() {
-        GrabinThreadFactory grabinThreadFactory = new GrabinThreadFactory();
-
-
-        return grabinThreadFactory;
+        return new GrabinThreadFactory();
     }
 }

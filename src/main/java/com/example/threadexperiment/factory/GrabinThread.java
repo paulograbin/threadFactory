@@ -8,6 +8,9 @@ public class GrabinThread extends Thread {
 
     private final static Logger LOG = LoggerFactory.getLogger(GrabinThread.class);
 
+    public GrabinThread(String threadNamePrefix, int i) {
+        super(threadNamePrefix + i);
+    }
 
     @Override
     public void run() {
@@ -17,7 +20,6 @@ public class GrabinThread extends Thread {
             logEnd();
         }
     }
-
 
     private void logEnd() {
         LOG.info("Thread ended.");

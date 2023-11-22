@@ -4,17 +4,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class GrabinThreadFactory implements ThreadFactory {
 
     private final static Logger LOG = LoggerFactory.getLogger(GrabinThreadFactory.class);
-    private final String factoryName = "GrabinFactory";
+    private final String threadNamePrefix = "g-thread-";
+
+    private final AtomicInteger threadCount = new AtomicInteger();
 
 
     @Override
     public Thread newThread(Runnable runnable) {
-        return new GrabinThread() {
+        return new GrabinThread(threadNamePrefix, threadCount.incrementAndGet()) {
             @Override
             protected void internalRun() {
                 try {
